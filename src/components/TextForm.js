@@ -8,13 +8,14 @@ export default function TextForm(props) {
     const handleUpClick = () => {
         // console.log("UpperCase clicked");
         setText(text.toUpperCase());
-        props.showAlert("Converted to upperCase",'success')
+        props.showAlert("Converted to upperCase", 'success')
     }
     const handleLowClick = () => {
         // console.log("UpperCase clicked");
         setText(text.toLowerCase());
-        props.showAlert("Converted to lowerCase",'success')
+        props.showAlert("Converted to lowerCase", 'success')
     }
+    // eslint-disable-next-line
     const handleSpaceClick = () => {
         // console.log("UpperCase clicked");
         setText(text.split(" ").join(""));
@@ -23,24 +24,26 @@ export default function TextForm(props) {
     const handleExtraSpace = () => {
         let newTxt = text.split(/[ ]+/);
         setText(newTxt.join(" "));
-        props.showAlert("Removed extra space",'success')
+        props.showAlert("Removed extra space", 'success')
 
     }
 
     const handleClearClick = () => {
         setText("");
-        props.showAlert("Cleared texts",'success')
+        props.showAlert("Cleared texts", 'success')
     }
-    
-    
+
+
     // change state of button
+    // eslint-disable-next-line
     const [copyTxt, setCopied] = useState("Copy Text");
-    
+
     const handleCopyClick = () => {
         if (copyTxt === 'Copy Text') {
             navigator.clipboard.writeText(text);
             // setCopied('Copied');
-            props.showAlert("Text is copied",'success')
+            document.getSelection().removeAllRanges();
+            props.showAlert("Text is copied", 'success')
             setTimeout(() => {
                 // setCopied('Copy Text');
             }, 3000);
@@ -55,29 +58,31 @@ export default function TextForm(props) {
 
     // making state means having text and we change value of text using setText function 
     // we directly change useState("changedText");
-    const [text, setText] = useState('Enter text here');
+    const [text, setText] = useState('');
     // text = "New text"; // wrong way to 
     // setText("New text"); // correct way to 
     return (
         <>
-            <div className='container' style={{ color: props.mode === 'dark' ? 'white' : '#042743' }} >
+
+            <div className='container ' style={{ color: props.mode === 'light' ? 'black' : 'green' }} >
                 <h2>{props.heading} </h2>
                 <div className="mb-3">
-                    <textarea className="form-control" value={text} style={{ backgroundColor: props.mode === 'dark' ? 'grey' : 'white' , color: props.mode === 'dark' ? 'white' : '#042743' }} onChange={handleOnChange} id="exampleFormControlTextarea1" rows="8"></textarea>
+                    <textarea className="form-control" value={text} 
+                    style={{ backgroundColor: props.mode === 'dark' ? '#13466e' : 'white', color: props.mode === 'dark' ? 'white' : '#042743' }} onChange={handleOnChange} id="exampleFormControlTextarea1" rows="8"></textarea>
                 </div>
-                <button className="btn btn-primary mx-1" onClick={handleUpClick} >toUpperCase</button>
-                <button className="btn btn-primary mx-1" onClick={handleLowClick} >toLowerCase</button>
-                {/* <button className="btn btn-primary mx-1" onClick={handleSpaceClick} >RemoveSpace</button> */}
-                <button className="btn btn-primary mx-1" onClick={handleClearClick} >Clear Text</button>
-                <button className="btn btn-primary mx-1" onClick={handleCopyClick} >{copyTxt}</button>
-                <button className="btn btn-primary mx-2 my-3" onClick={handleExtraSpace} >remove Extra Space</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick} >toUpperCase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick} >toLowerCase</button>
+                {/* <button className="btn btn-primary mx-1 my-1" onClick={handleSpaceClick} >RemoveSpace</button> */}
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick} >Clear Text</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopyClick} >{copyTxt}</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleExtraSpace} >remove Extra Space</button>
             </div>
-            <div className="container my-3" style={{ color: props.mode === 'dark' ? 'white' : '#042743' }}>
+            <div className="container my-3" style={{ color: props.mode === 'dark' ?'green':'black' }}>
                 <h1>Your Text summary</h1>
-                <p>{text.split(" ").length} words and {text.length} charcters</p>
-                <p>Average time to read : {(text.split(" ").length * 0.008 * 60).toFixed(2)} second </p>
+                <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} charcters</p>
+                <p>Average time to read : {(text.split(" ").filter((element)=>{return element.length!==0}).length * 0.008 * 60).toFixed(2)} second </p>
                 <h3>Preview : </h3>
-                <p>{text.length>0?text:"Enter something in the text above to previes here"}</p>
+                <p>{text.length > 0 ? text : "Nothing to preview"}</p>
             </div>
             <hr />
         </>

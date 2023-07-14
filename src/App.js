@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import About from './components/About';
 import ChangeBg from './components/ChangeBg';
 import Alert from './components/Alert'
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  RouterProvider,
-  Switch,
-  Link,
+  Routes
 } from "react-router-dom"
 
 
 // react replace class to className (becuase class is reserver in js)
 
-let name = "<b>Lokeshwar Prasad</b>";
 
 function App() {
 
@@ -27,6 +21,7 @@ function App() {
   const [alert, setAlert] = useState(null);
 
   // button clicking state
+  // eslint-disable-next-line
   const [bg, newBg] = useState();
 
   const setBg = (bg) => {
@@ -50,13 +45,13 @@ function App() {
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
       showAlert("Dark mode has been enabled", "success");
-      document.title = 'WordUtils - darkmode';
+      // document.title = 'WordUtils - darkmode';
     }
     else {
       setMode('light');
       document.body.style.backgroundColor = 'white';
       showAlert("Light mode has been enabled", "success");
-      document.title = 'WordUtils - lightmode';
+      // document.title = 'WordUtils - lightmode';
     }
   }
   return (
@@ -68,30 +63,29 @@ function App() {
 
     <>
 
-      {/* props means passing properties like title heading about section values using parameter of function */}
-      {/* and it render according to values */}
-
-      {/* <Navbar title="LokeshwarPrasad" aboutText="About Lokeshwar" />  */}
-      {/* if not passing values then defaultProps is taken values */}
-      <Navbar title="WordUtiles" mode={mode} toggleMode={toggleMode} />
-      {/* <Navbar /> */}
-      <strong><Alert alert={alert} /></strong>
+      <Router>
 
 
-      <ChangeBg setBg={setBg} />
+        {/* props means passing properties like title heading about section values using parameter of function */}
+        {/* and it render according to values */}
 
-      <div className="container my-3">
+        {/* <Navbar title="LokeshwarPrasad" aboutText="About Lokeshwar" />  */}
+        {/* if not passing values then defaultProps is taken values */}
+        <Navbar title="WordUtiles" mode={mode} toggleMode={toggleMode} />
+        {/* <Navbar /> */}
+        <strong><Alert alert={alert} /></strong>
+        <ChangeBg setBg={setBg} />
 
-        <Router>
+        <div className="container">
           <Routes>
-            <Route exact path="/about" element={<About mode={mode} />} />
-            <Route exact path="/" element={<TextForm heading="Enter Text to analyze below :" showAlert={showAlert} mode={mode} />} />
+            <Route exact path="/" element={
+              <TextForm heading="Text-Transform-Tool - More operation over words" showAlert={showAlert} mode={mode} />} />
           </Routes>
-        </Router>
+        </div>
+      </Router>
 
-      </div>
+
     </>
-
   );
 }
 

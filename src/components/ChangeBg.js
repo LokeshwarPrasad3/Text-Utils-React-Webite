@@ -30,7 +30,7 @@ export default function ChangeBg(props) {
                 <button className='btn btn-primary mx-1' onClick={gbgChange} style={{ padding: '2px 10px',borderRadius:"99px", backgroundColor: 'green' }}>G</button>
                 <button className='btn btn-primary mx-1' onClick={cbgChange} style={{ padding: '2px 10px',borderRadius:"99px", backgroundColor: 'coral' }}>C</button>
                 <button className='btn btn-primary mx-1' onClick={pbgChange} style={{ padding: '2px 10px',borderRadius:"99px", backgroundColor: 'purple' }}>P</button>
-                <button className='btn btn-primary mx-1' onClick={bbgChange} style={{ padding: '2px 10px',borderRadius:"99px", backgroundColor: 'black' }}>P</button>
+                <button className='btn btn-primary mx-1' onClick={bbgChange} style={{ padding: '2px 10px',borderRadius:"99px", backgroundColor: 'black' }}>B</button>
             </div>
 
         </div>
