@@ -4,7 +4,7 @@ Perform various word operations and transformations with Text Utils. Count chara
 
 ## Live Demo
 
-The project is live and hosted at: [https://text-transform-tools.onrender.com](https://text-transform-tools.onrender.com)
+The project is live and hosted at: [https://text-transform-tools.netlify.app](https://text-transform-tools.netlify.app)
 
 ## Technologies Used
 
